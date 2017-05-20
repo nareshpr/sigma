@@ -29,4 +29,5 @@ public interface ExceptionMessageKeys {
 	public static final String INVALID_WORKFLOW_DEFINITION = "INVALID_WORKFLOW_DEFINITION";
 	public static final String FAILED_STATE = "FAILED_STATE";
 	public static final String SKIP_STATE_EXECUTION = "SKIP_STATE_EXECUTION";
+	public static final String TERMINATE_STATE_EXECUTION = "TERMINATE_STATE_EXECUTION";
 }

@@ -34,6 +34,15 @@ public class DatabaseQueryContext extends WorkflowContext<DatabaseQueryRequest> 
   private Connection connection;
   private String sqlQuery;
   private ResultSet resultSet;
+  private boolean terminateStateExecution;
+
+  public boolean isTerminateStateExecution() {
+    return terminateStateExecution;
+  }
+
+  public void setTerminateStateExecution(boolean terminateStateExecution) {
+    this.terminateStateExecution = terminateStateExecution;
+  }
 
   public Connection getConnection() {
     return connection;

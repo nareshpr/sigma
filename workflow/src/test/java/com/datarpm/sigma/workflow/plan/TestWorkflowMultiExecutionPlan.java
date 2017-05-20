@@ -62,10 +62,10 @@ public class TestWorkflowMultiExecutionPlan extends TestCase {
 
 		builder = new WorkflowExecutionPlan.Builder<SimpleWorkflowRequest, SimpleWorkflowContext>(
 				simpleRequest, contextFactory);
-		builder.executeState(new FirstState())
-				.executeConcurrent(new ConcurrentState("T1"),
-						new ConcurrentState("T2"))
-				.executeState(new NextState());
+		builder.executeState(new FirstState());
+		builder.executeConcurrent(new ConcurrentState("T1"),
+						new ConcurrentState("T2"));
+		builder.executeState(new NextState());
 
 		WorkflowEngineConfig config = new WorkflowEngineConfig();
 		config.setWorkerThreadCount(2);

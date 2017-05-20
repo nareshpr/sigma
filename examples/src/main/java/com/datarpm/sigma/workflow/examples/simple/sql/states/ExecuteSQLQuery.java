@@ -24,6 +24,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.datarpm.sigma.workflow.AddStateListner;
 import com.datarpm.sigma.workflow.WorkflowState;
 import com.datarpm.sigma.workflow.WorkflowStateException;
 import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryContext;
@@ -33,6 +34,7 @@ import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryRequest;
  * @author vinay
  *
  */
+@AddStateListner(names = { TerminateExecutionListener.class })
 public class ExecuteSQLQuery implements WorkflowState<DatabaseQueryRequest, DatabaseQueryContext> {
 
   @Override

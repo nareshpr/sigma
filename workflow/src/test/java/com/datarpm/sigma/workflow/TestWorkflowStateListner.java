@@ -222,4 +222,58 @@ public class TestWorkflowStateListner extends TestCase {
 		}
 
 	}
+
+	public static class TerminateWorkflowContext extends
+			com.datarpm.sigma.workflow.WorkflowContext<TerminateWorkflowRequest> {
+
+		private static final long serialVersionUID = 1L;
+		private boolean beforelistnerExecuted;
+
+		public boolean isBeforelistnerExecuted() {
+			return beforelistnerExecuted;
+		}
+
+		public void setBeforelistnerExecuted(boolean beforelistnerExecuted) {
+			this.beforelistnerExecuted = beforelistnerExecuted;
+		}
+	}
+
+	@com.datarpm.sigma.workflow.WorkflowRequest
+	@States(names = { TerminateState.class })
+	@Context(name = TerminateWorkflowContext.class)
+	class TerminateWorkflowRequest {
+	}
+
+	public static class TerminateStateListner	implements
+			WorkflowStateListner<TerminateWorkflowRequest, TerminateWorkflowContext> {
+		@Override
+		public void before(TerminateWorkflowContext context) throws DoNotExecuteStateException,
+				ListnerExecutionFailureException {
+			context.setBeforelistnerExecuted(EXECUTED);
+			throw new TerminateExecutionException(ExceptionMessageKeys.TERMINATE_STATE_EXECUTION);
+		}
+		@Override
+		public void after(TerminateWorkflowContext context)
+				throws ListnerExecutionFailureException {
+		}
+	}
+
+	@AddStateListner(names = { TerminateStateListner.class })
+	public static class TerminateState implements
+			WorkflowState<CheckListnerWorkflowRequest, CheckListnerWorkflowContext> {
+		@Override
+		public void execute(CheckListnerWorkflowContext context)
+				throws WorkflowStateException {
+			System.out
+					.println("Report Failure, skipped stated must not be executed after this");
+			context.setStateExecuted(EXECUTED);
+		}
+	}
+
+	@Test
+	public void testWorkflowStateListnerTerminateExecuteState() throws Exception {
+		TerminateWorkflowContext context = (TerminateWorkflowContext) new WorkflowEngine()
+				.execute(new TerminateWorkflowRequest());
+		assertEquals(context.isBeforelistnerExecuted(), EXECUTED);
+	}
 }

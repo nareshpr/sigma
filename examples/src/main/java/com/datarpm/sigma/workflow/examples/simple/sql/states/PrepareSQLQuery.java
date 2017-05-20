@@ -19,6 +19,7 @@
  */
 package com.datarpm.sigma.workflow.examples.simple.sql.states;
 
+import com.datarpm.sigma.workflow.AddStateListner;
 import com.datarpm.sigma.workflow.WorkflowState;
 import com.datarpm.sigma.workflow.WorkflowStateException;
 import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryContext;
@@ -28,6 +29,7 @@ import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryRequest;
  * @author vinay
  *
  */
+@AddStateListner(names = { TerminateExecutionListener.class })
 public class PrepareSQLQuery implements WorkflowState<DatabaseQueryRequest, DatabaseQueryContext> {
 
   @Override

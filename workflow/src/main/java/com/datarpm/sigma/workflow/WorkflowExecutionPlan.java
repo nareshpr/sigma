@@ -178,7 +178,7 @@ public class WorkflowExecutionPlan<R, C extends WorkflowContext<R>> {
     }
 
     @SuppressWarnings("unchecked")
-    public Builder<R, C> executeState(WorkflowState<R, C> state) {
+    public void executeState(WorkflowState<R, C> state) {
       Instruction e = new Instruction(TYPE.STATE_EXECUTION);
       e.addStates(state);
 
@@ -186,11 +186,10 @@ public class WorkflowExecutionPlan<R, C extends WorkflowContext<R>> {
 
       executionPlan.add(executionFlow);
       numberOfStates++;
-      return this;
     }
 
     @SuppressWarnings("unchecked")
-    public Builder<R, C> executeConcurrent(WorkflowState<R, C>... states) {
+    public void executeConcurrent(WorkflowState<R, C>... states) {
       Instruction e = new Instruction(TYPE.STATE_EXECUTION);
       e.addStates(states);
 
@@ -198,7 +197,6 @@ public class WorkflowExecutionPlan<R, C extends WorkflowContext<R>> {
 
       executionPlan.add(executionFlow);
       numberOfStates += states.length;
-      return this;
     }
 
     @SuppressWarnings("unchecked")

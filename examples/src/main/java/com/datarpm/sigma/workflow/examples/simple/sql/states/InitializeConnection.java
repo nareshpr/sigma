@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.datarpm.sigma.workflow.AddStateListner;
 import com.datarpm.sigma.workflow.WorkflowState;
 import com.datarpm.sigma.workflow.WorkflowStateException;
 import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryContext;
@@ -32,6 +33,7 @@ import com.datarpm.sigma.workflow.examples.simple.sql.DatabaseQueryRequest;
  * @author vinay
  *
  */
+@AddStateListner(names = { TerminateExecutionListener.class })
 public class InitializeConnection
     implements WorkflowState<DatabaseQueryRequest, DatabaseQueryContext> {
 
